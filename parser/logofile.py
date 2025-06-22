@@ -420,7 +420,12 @@ class LogoCommand:
 	
 	def _process_activeturtle(self):
 		o = self._file.name_to_object(self.callees[-1])
-		o._change(38, self._file.name_to_object(self.parameters[0]).__name__)
+		active = None
+		if isinstance(self.parameters[0], list):
+			active = [self._file.name_to_object(n).__name__ for n in self.parameters[0]]
+		else:
+			active = self._file.name_to_object(self.parameters[0]).__name__
+		o._change(38, active)
 		
 
 class LogoFile:
