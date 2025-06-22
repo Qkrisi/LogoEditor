@@ -298,7 +298,7 @@ def handle_upload(e: events.UploadEventArguments):
                                         with ui.row().classes("no-wrap w-full"):
                                             for img in frame.images:
                                                 width = IMAGE_HEIGHT*(img.width/img.height)
-                                                ui.image("data:image/bmp;base64," + img_base64(img)).style("border: 1px solid black;").props(f"height={IMAGE_HEIGHT}px width={width}px fit=fill").on("click", lambda i=img:view_image(i))
+                                                ui.image("data:image/bmp;base64," + img_base64(img)).style("border: 1px solid black; cursor: pointer;").props(f"height={IMAGE_HEIGHT}px width={width}px fit=fill").on("click", lambda i=img:view_image(i))
                                 with ui.column():
                                     ui.label(f"Nullszög: {g.angle0}°")
                                     with ui.row():
@@ -327,7 +327,7 @@ def handle_upload(e: events.UploadEventArguments):
                                             b64 = "data:image/gif;base64," + base64.b64encode(create_gif(map(lambda x:x.get_alpha_bmp(), frame.images))).decode("utf-8")
                                         else:
                                             b64 = "data:image/bmp;base64," + img_base64(frame.images[0])
-                                        ui.image(b64).style("border: 1px solid black;").props("fit=fill").on("click", lambda r=fr,acb=alphacb,sl=sizelabel,axl=axlabel,ayl=aylabel,dl=delaylabel,v=fw,f=frame:view_frame(r,acb,sl,axl,ayl,dl,v,f))
+                                        ui.image(b64).style("border: 1px solid black; cursor: pointer;").props("fit=fill").on("click", lambda r=fr,acb=alphacb,sl=sizelabel,axl=axlabel,ayl=aylabel,dl=delaylabel,v=fw,f=frame:view_frame(r,acb,sl,axl,ayl,dl,v,f))
 
 def try_upload(e: events.UploadEventArguments):
     try:
