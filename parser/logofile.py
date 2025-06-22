@@ -89,7 +89,6 @@ def _process_setting(key: str, value: object, locales, definitions: dict[str, st
 		key = key.replace(locales.SETTING_SELFDEFINE, "", 1)
 		if isinstance(value, list):
 			newvalue: str = "eljárás " + key
-			print(value)
 			for p in value[0]:
 				newvalue += " :" + p
 			newvalue += chr(0xB6) + " " + _tostr(value[1]).replace("|", "") + chr(0xB6) + "vége"
@@ -345,6 +344,10 @@ class LogoCommand:
 			if _process_setting(str(key), value, self._locales, definitions, events, ownvars, commonvars):
 				continue
 			o._change(key, value, True)
+			if key == 41:	#homestate
+				o._change(2, value[0][0], True)	#xpos
+				o._change(3, value[0][1], True)	#ypos
+				o._change(4, value[0][:], True)	#pos
 		o.definitions.update(definitions)
 		o.events.update(events)
 		o.ownvars.update(ownvars)
