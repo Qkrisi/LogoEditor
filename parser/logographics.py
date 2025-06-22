@@ -111,6 +111,8 @@ class LogoImage:
 				stream.read(2)	#_1
 				length = utils.readint32(stream)
 				bmp24 = stream.read(length)
+				if startnum <= 2:
+					break
 			elif t == 0x4D:	#M - alpha
 				stream.read(2)	#_1
 				length = utils.readint32(stream)
