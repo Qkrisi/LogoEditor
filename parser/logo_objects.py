@@ -61,11 +61,12 @@ class Main:
 			setting.localname = locales.SETTINGS[setting.index]
 	
 	def _change(self, key: object, value, force: bool = False, record: bool = True):
-		setting: str = SETTINGS[key] if isinstance(key, int) and 1 <= key and key < len(SETTINGS) else str(key)
+		is_setting: bool = isinstance(key, int) and 1 <= key and key < len(SETTINGS)
+		setting: str = SETTINGS[key] if is_setting else str(key)
 		if setting == "???" or setting == "":
 			self._unknown[key] = value
 			return
-		if hasattr(self, setting):
+		if is_setting and hasattr(self, setting):
 			setattr(self, setting, value)
 			if record:
 				self._settings[key].changed = True

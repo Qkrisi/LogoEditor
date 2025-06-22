@@ -379,7 +379,9 @@ class LogoCommand:
 			if _process_setting(str(key), value, self._locales, definitions, events, ownvars, commonvars):
 				continue
 			if key in self._locales.SETTINGS:
-				key = self._locales.SETTINGS.index(key)
+				keyindex = self._locales.SETTINGS.index(key)
+				if f"_{keyindex}" in settings:
+					key = self._locales.SETTINGS.index(key)
 			try:
 				settingnum: int = int(key)
 				if settingnum > 0 and settingnum <= len(obj.SETTINGS):
